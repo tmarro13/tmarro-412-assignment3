@@ -90,7 +90,7 @@ img {
     height: auto; /* This keeps the aspect ratio intact */
     object-fit: cover; /* Ensures the image fits within the box, cropping the overflow */
     border-radius: 8px; /* Optional: Adds rounded corners to the image */
-    display: block; /* Removes any space below the image */
+    display: block; /* Removes space below the image */
 }
 
 /* Footer styles */
