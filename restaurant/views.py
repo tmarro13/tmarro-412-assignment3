@@ -6,7 +6,10 @@ import time
 
 # View for the main page
 def main(request):
-    return render(request, 'restaurant/main.html')
+    context = {
+        'current_time' : time.ctime()
+    }
+    return render(request, 'restaurant/main.html', context)
 
 
 # View for the order page
@@ -14,7 +17,8 @@ def order(request):
     specials = ['Pizza', 'Burger', 'French Fries', 'Hot Dog']
     daily_special = random.choice(specials)
     context = {
-        'daily_special': daily_special
+        'daily_special': daily_special,
+        'current_time' : time.ctime()
     }
     return render(request, 'restaurant/order.html', context)
 
