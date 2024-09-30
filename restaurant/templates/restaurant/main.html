@@ -1,0 +1,11 @@
+<!-- restaurant/templates/restaurant/main.html -->
+{% extends 'restaurant/base.html' %}
+
+{% load static %}  <!-- Add this line -->
+
+{% block content %}
+<h2>Restaurant Information</h2>
+<p>Location: 123 Main Street</p>
+<p>Hours: 10 AM - 10 PM</p>
+<img src="{% static 'restaurant/photo.jpg' %}" alt="Restaurant Photo">
+{% endblock %}

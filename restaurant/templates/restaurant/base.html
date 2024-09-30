@@ -1,0 +1,30 @@
+<!-- restaurant/templates/restaurant/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+
+    {% load static %}  <!-- Add this line -->
+
+    <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Not McDonald's!</h1>
+        <nav>
+            <a href="{% url 'main' %}">Main</a>
+            <a href="{% url 'order' %}">Order</a>
+        </nav>
+    </header>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+<footer>
+    Page created by tmarro@bu.edu.<br>
+    This page was generated at {{current_time}}.
+</footer>
+</html>
