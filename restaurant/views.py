@@ -60,7 +60,4 @@ def confirmation(request):
             "current_time" : time.ctime()
         }
 
-
-    
-
         return render(request, 'restaurant/confirmation.html', context)
