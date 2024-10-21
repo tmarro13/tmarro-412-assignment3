@@ -39,7 +39,14 @@
                     <li class="status-item">
                         <p class="status-message">{{ status.message }}</p>
                         <span class="status-timestamp">{{ status.timestamp|date:"F j, Y, g:i a" }}</span>
+                        {% for img in status.get_images %}
+                            <img src="{{ img.image_file.url }}" alt="Status Image">
+                        {% endfor %}
+                        <a href="{% url 'update_status' status.pk %}">Update</a>
+                        <a href="{% url 'delete_status' status.pk %}">Delete</a>
                     </li>
+                {% empty %}
+                    <p>No status messages to display.</p>
                 {% endfor %}
             </ul>
         {% else %}

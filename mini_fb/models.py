@@ -34,3 +34,11 @@ class StatusMessage(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     message = models.TextField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='status_messages')
+    
+    def get_images(self):
+        return self.image_set.all()
+
+class Image(models.Model):
+    image_file = models.ImageField(upload_to='status_images')
+    status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)

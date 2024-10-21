@@ -37,3 +37,13 @@ class CreateStatusMessageForm(forms.ModelForm):
         labels = {
             'message': 'Your Status',
         }
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['city', 'email']
+
+class CreateStatusMessageForm(forms.ModelForm):
+    class Meta:
+        model = StatusMessage
+        fields = ['message']
