@@ -18,7 +18,7 @@ class Profile(models.Model):
         return f'{self.firstname} {self.lastname}' 
     def __str__(self):
         '''Return a string representation of this Profile object.'''
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.firstname} {self.lastname}'
 
     def get_status_messages(self):
         '''Return all status messages related to this profile, ordered by timestamp descending.'''
