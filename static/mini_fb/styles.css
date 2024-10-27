@@ -76,7 +76,6 @@ td img {
     margin: auto;
 }
 
-
 td:first-child {
     text-align: left; /* Align names to the left */
 }
@@ -113,4 +112,102 @@ tr:hover {
         width: 80px;
         height: 80px;
     }
+}
+
+/* Friend Suggestions Section */
+.friend-suggestions {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e7f3ff;
+    border: 1px solid #d0e6f9;
+    border-radius: 10px;
+}
+
+.friend-suggestions h2 {
+    font-size: 2rem;
+    color: #3b5998;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.friend-suggestions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.friend-suggestions li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.friend-suggestions li a {
+    color: #3b5998;
+    margin-right: 10px;
+}
+
+.friend-suggestions li a.add-friend {
+    background-color: #3b5998;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.friend-suggestions li a.add-friend:hover {
+    background-color: #2e477a;
+}
+
+/* News Feed Section */
+.news-feed {
+    margin-top: 30px;
+}
+
+.news-feed h2 {
+    font-size: 2rem;
+    color: #3b5998;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.news-feed .status-item {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.news-feed .status-item strong {
+    color: #3b5998;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.news-feed .status-item p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.news-feed .status-item .status-timestamp {
+    font-size: 0.8rem;
+    color: #999;
+    display: block;
+    margin-top: 5px;
+}
+
+.news-feed img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
 }
