@@ -1,0 +1,112 @@
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Voter List</h2>
+    
+    <!-- Filter Form -->
+    <form method="get" class="filter-form">
+        <div>
+            <label for="party_affiliation">Party Affiliation:</label>
+            <select name="party_affiliation" id="party_affiliation">
+                <option value="">Any</option>
+                {% for party in party_choices %}
+                    <option value="{{ party }}" {% if request.GET.party_affiliation == party %}selected{% endif %}>{{ party }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label for="min_dob">Min Date of Birth:</label>
+            <select name="min_dob" id="min_dob">
+                <option value="">Any</option>
+                {% for year in year_choices %}
+                    <option value="{{ year }}" {% if request.GET.min_dob == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label for="max_dob">Max Date of Birth:</label>
+            <select name="max_dob" id="max_dob">
+                <option value="">Any</option>
+                {% for year in year_choices %}
+                    <option value="{{ year }}" {% if request.GET.max_dob == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    
+        <div>
+            <label for="voter_score">Voter Score:</label>
+            <select name="voter_score" id="voter_score">
+                <option value="">Any</option>
+                {% for score in voter_score_choices %}
+                    <option value="{{ score }}" {% if request.GET.voter_score == score|stringformat:"s" %}selected{% endif %}>{{ score }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label>Voted in Elections:</label>
+            <div>
+                <input type="checkbox" name="v20state" id="v20state" {% if request.GET.v20state %}checked{% endif %}>
+                <label for="v20state">2020 State</label>
+            </div>
+            <div>
+                <input type="checkbox" name="v21town" id="v21town" {% if request.GET.v21town %}checked{% endif %}>
+                <label for="v21town">2021 Town</label>
+            </div>
+            <div>
+                <input type="checkbox" name="v21primary" id="v21primary" {% if request.GET.v21primary %}checked{% endif %}>
+                <label for="v21primary">2021 Primary</label>
+            </div>
+            <div>
+                <input type="checkbox" name="v22general" id="v22general" {% if request.GET.v22general %}checked{% endif %}>
+                <label for="v22general">2022 General</label>
+            </div>
+            <div>
+                <input type="checkbox" name="v23town" id="v23town" {% if request.GET.v23town %}checked{% endif %}>
+                <label for="v23town">2023 Town</label>
+            </div>
+        </div>
+    
+        <button type="submit">Apply Filters</button>
+        <a href="{% url 'voters' %}">Clear Filters</a>
+    </form>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Street Address</th>
+            <th>Date of Birth</th>
+            <th>Party Affiliation</th>
+            <th>Voter Score</th>
+            <th>Details</th>
+        </tr>
+        {% for voter in object_list %}
+        <tr>
+            <td>{{ voter.first_name }} {{ voter.last_name }}</td>
+            <td>{{ voter.street_number }} {{ voter.street_name }}</td>
+            <td>{{ voter.date_of_birth|date:"Y-m-d" }}</td>
+            <td>{{ voter.party_affiliation }}</td>
+            <td>{{ voter.voter_score }}/5</td>
+            <td><a href="{% url 'voter' voter.pk %}">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    {% if is_paginated %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Previous</a>
+        {% endif %}
+        
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Next</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

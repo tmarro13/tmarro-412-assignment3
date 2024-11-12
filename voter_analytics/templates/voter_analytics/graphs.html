@@ -1,0 +1,27 @@
+{% extends "voter_analytics/base.html" %}
+
+{% block content %}
+<h1>Voter Analytics Graphs</h1>
+
+<form method="get">
+    {% include 'voter_analytics/filter_form.html' %}
+</form>
+
+<h2>Distribution of Voters by Year of Birth</h2>
+<div>
+    {{ year_of_birth_graph|safe }}
+</div>
+
+<h2>Distribution of Voters by Party Affiliation</h2>
+<div>
+    {{ party_affiliation_graph|safe }}
+</div>
+
+<h2>Voter Participation in Elections</h2>
+<div>
+    {{ election_participation_graph|safe }}
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+{% endblock %}
