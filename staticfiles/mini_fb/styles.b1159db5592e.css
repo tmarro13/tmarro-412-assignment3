@@ -1,0 +1,213 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Container for the main content */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Header section */
+h1 {
+    font-size: 2.5rem;
+    color: #3b5998;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Links */
+a {
+    color: #3b5998;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Profiles Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #3b5998;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1rem;
+    text-align: center; /* Center headers for alignment */
+}
+
+th:first-child, td:first-child {
+    text-align: left; /* Left-align the first column (Name) */
+}
+
+td {
+    text-align: center; /* Center-align the rest of the columns */
+}
+
+/* Profile Image Styling */
+td img {
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+}
+
+td:first-child {
+    text-align: left; /* Align names to the left */
+}
+
+/* Footer section */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    color: #999;
+}
+
+/* Add a hover effect to rows */
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Adjusting font size and layout for small screens */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    td img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* Friend Suggestions Section */
+.friend-suggestions {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e7f3ff;
+    border: 1px solid #d0e6f9;
+    border-radius: 10px;
+}
+
+.friend-suggestions h2 {
+    font-size: 2rem;
+    color: #3b5998;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.friend-suggestions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.friend-suggestions li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.friend-suggestions li a {
+    color: #3b5998;
+    margin-right: 10px;
+}
+
+.friend-suggestions li a.add-friend {
+    background-color: #3b5998;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.friend-suggestions li a.add-friend:hover {
+    background-color: #2e477a;
+}
+
+/* News Feed Section */
+.news-feed {
+    margin-top: 30px;
+}
+
+.news-feed h2 {
+    font-size: 2rem;
+    color: #3b5998;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.news-feed .status-item {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.news-feed .status-item strong {
+    color: #3b5998;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.news-feed .status-item p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.news-feed .status-item .status-timestamp {
+    font-size: 0.8rem;
+    color: #999;
+    display: block;
+    margin-top: 5px;
+}
+
+.news-feed img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}

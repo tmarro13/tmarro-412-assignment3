@@ -19,11 +19,19 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("quotes", include("quotes.urls")),
     path('restaurant/', include('restaurant.urls')),
     path("mini_fb/", include("mini_fb.urls")),
     path("voter_analytics/", include("voter_analytics.urls")),
+    path('project/', include('project.urls')),  # Include URLs for the project app
 ] + static(settings.STATIC_URL,
-           document_root=settings.STATIC_ROOT)
+           document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Add static and media URL handling
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:  # Serve media files during development
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

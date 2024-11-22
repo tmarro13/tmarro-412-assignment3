@@ -1,0 +1,60 @@
+<h1>Movies</h1>
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <strong>{{ movie.title }}</strong> ({{ movie.release_year }}) by {{ movie.director }}
+                <br>
+                {% if movie.image %}
+                    <img src="{{ movie.image.url }}" alt="{{ movie.title }}" style="max-width: 200px; height: auto;">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+                <br>
+                <a href="{{ movie.id }}/">View Details</a>
+                <ul>
+                    <li><strong>Tags:</strong></li>
+                    {% if movie.tags.all %}
+                        <ul>
+                            {% for tag in movie.tags.all %}
+                                <li>{{ tag.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No tags available.</p>
+                    {% endif %}
+                </ul>
+                <ul>
+                    <li><strong>Reviews:</strong></li>
+                    {% for review in movie.reviews.all %}
+                        <li>
+                            <strong>{{ review.user.username }}</strong> - Rating: {{ review.rating }}
+                            <br>
+                            {{ review.review_text }}
+                        </li>
+                    {% empty %}
+                        <li>No reviews yet.</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% empty %}
+            <li>No movies available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_movie' %}">Add a Movie</a>
+{% else %}
+    <p>You are not logged in.</p>
+    <p>
+        <a href="{% url 'login' %}">Login</a> or 
+        <a href="{% url 'signup' %}">Create an Account</a> to add and review movies.
+    </p>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.title }} ({{ movie.release_year }})</li>
+        {% empty %}
+            <li>No movies available.</li>
+        {% endfor %}
+    </ul>
+{% endif %}
