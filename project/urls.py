@@ -9,4 +9,5 @@ urlpatterns = [
     path('add/', views.add_movie, name='add_movie'),  # Add movie page
     path('accounts/login/', CustomLoginView.as_view(), name='login'),
     path("accounts/signup/", signup, name="signup"),
+    path('edit/<int:pk>/', views.edit_movie, name='edit_movie'),
 ]

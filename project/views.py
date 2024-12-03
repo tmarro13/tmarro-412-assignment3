@@ -23,10 +23,26 @@ def movie_list(request):
     movies = Movie.objects.all()
     return render(request, 'project/movie_list.html', {'movies': movies})
 
-def movie_detail(request, pk):
-    movie = get_object_or_404(Movie, pk=pk)
+def movie_detail(request, pk):  # Changed 'movie_id' to 'pk'
+    movie = get_object_or_404(Movie, id=pk)
     reviews = movie.reviews.all()
-    return render(request, 'project/movie_detail.html', {'movie': movie, 'reviews': reviews})
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        review_form = ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.movie = movie
+            review.user = request.user
+            review.save()
+            return redirect('movie_detail', pk=movie.id)
+    else:
+        review_form = ReviewForm()
+
+    return render(request, 'project/movie_detail.html', {
+        'movie': movie,
+        'reviews': reviews,
+        'review_form': review_form,
+    })
 
 @login_required
 def add_movie(request):
@@ -56,3 +72,15 @@ def add_movie(request):
         'movie_form': movie_form,
         'review_form': review_form
     })
+
+@login_required
+def edit_movie(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    if request.method == 'POST':
+        form = MovieForm(request.POST, request.FILES, instance=movie)
+        if form.is_valid():
+            form.save()
+            return redirect('movie_detail', pk=movie.pk)
+    else:
+        form = MovieForm(instance=movie)
+    return render(request, 'project/edit_movie.html', {'form': form, 'movie': movie})
