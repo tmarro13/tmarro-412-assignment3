@@ -3,17 +3,18 @@
 {% block title %}My Reviews{% endblock %}
 
 {% block content %}
-    <h2>My Reviews</h2>
-    <ul>
-        {% for review in reviews %}
-            <li>
-                <strong>{{ review.movie.title }}</strong> ({{ review.rating }}/10)
-                <p>{{ review.review_text }}</p>
-                <small>Posted on {{ review.created_at|date:"F j, Y, g:i a" }}</small>
-                <a href="{% url 'edit_review' review.id %}" class="btn btn-sm btn-primary">Edit Review</a>
-            </li>
-        {% empty %}
-            <p>You have not written any reviews yet.</p>
-        {% endfor %}
-    </ul>
+<h2>My Reviews</h2>
+<div class="reviews-container">
+    {% for review in reviews %}
+        <div class="review-card">
+            <h3>{{ review.movie.title }}</h3>
+            <p class="rating">Rating: {{ review.rating }}/10</p>
+            <p>{{ review.review_text }}</p>
+            <p class="timestamp">Posted on {{ review.created_at|date:"F j, Y, g:i a" }}</p>
+            <a href="{% url 'edit_review' review.id %}" class="btn btn-primary btn-sm">Edit Review</a>
+        </div>
+    {% empty %}
+        <p>You have not written any reviews yet.</p>
+    {% endfor %}
+</div>
 {% endblock %}

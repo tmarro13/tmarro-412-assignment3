@@ -1,26 +1,23 @@
 {% extends 'project/base.html' %}
 
-{% block title %}
-    Recent Reviews
-{% endblock %}
-
 {% block content %}
-    <div class="container mt-4">
-        <h1 class="text-center">Recent Reviews</h1>
-        <ul class="list-group mt-3">
-            {% for review in reviews %}
-                <li class="list-group-item">
-                    <strong>{{ review.movie.title }}</strong> by {{ review.user.username }}:
-                    <span class="text-muted">Rated {{ review.rating }}/10</span>
-                    <p>{{ review.review_text }}</p>
-                    <small class="text-muted">Posted on {{ review.created_at|date:"F j, Y, g:i a" }}</small>
-                </li>
-            {% empty %}
-                <li class="list-group-item text-center">No reviews available.</li>
-            {% endfor %}
-        </ul>
-        <div class="text-center mt-4">
-            <a href="{% url 'movie_list' %}" class="btn btn-secondary">Back to Movies</a>
-        </div>
+<div class="container mt-4">
+    <h1 class="text-center">Recent Reviews</h1>
+    <div class="reviews-container">
+        {% for review in reviews %}
+            <div class="review-card">
+                <h3>{{ review.movie.title }}</h3>
+                <p class="rating">Rated {{ review.rating }}/10</p>
+                <p><strong>{{ review.user.username }}</strong> says:</p>
+                <p>{{ review.review_text }}</p>
+                <p class="timestamp">Posted on {{ review.created_at|date:"F j, Y, g:i a" }}</p>
+            </div>
+        {% empty %}
+            <p class="text-center">No reviews available.</p>
+        {% endfor %}
     </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'movie_list' %}" class="btn btn-secondary">Back to Movies</a>
+    </div>
+</div>
 {% endblock %}

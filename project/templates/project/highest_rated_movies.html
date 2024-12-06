@@ -13,7 +13,7 @@
                 {% else %}
                     <img src="https://via.placeholder.com/200x300?text=No+Image" alt="No Image">
                 {% endif %}
-                <p><strong>Rating:</strong> {{ movie.average_rating }}</p>
+                <p><strong>Avg Rating:</strong> {{ movie.average_rating|floatformat:2  }}</p>
                 <a href="{% url 'movie_detail' movie.id %}">View Details</a>
             </div>
         {% empty %}

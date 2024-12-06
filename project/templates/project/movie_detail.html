@@ -5,6 +5,7 @@
 <img src="{{ movie.image }}" alt="{{ movie.title }}" style="max-width: 300px; height: auto;">
 <p><strong>Release Year:</strong> {{ movie.release_year }}</p>
 <p><strong>Director:</strong> {{ movie.director }}</p>
+<p><strong>Avg Rating:</strong> {{ movie.average_rating|floatformat:2  }}</p>
 
 <h3>Tags:</h3>
 <ul>

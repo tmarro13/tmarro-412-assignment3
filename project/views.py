@@ -24,7 +24,7 @@ def signup(request):
             return redirect('movie_list')  # Redirect to the movie list page
     else:
         form = UserCreationForm()
-    return render(request, 'project/signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})
 
 def tmdb_search(request):
     query = request.GET.get('query', '')
@@ -127,7 +127,7 @@ def edit_review(request, pk):
 
 # Movie detail view
 def movie_detail(request, pk):
-    movie = get_object_or_404(Movie, id=pk)
+    movie = get_object_or_404(Movie.objects.annotate(average_rating=Avg('reviews__rating')), id=pk)
     reviews = Review.objects.filter(movie=movie)
     
     if request.method == "POST":
@@ -142,11 +142,13 @@ def movie_detail(request, pk):
             return redirect('movie_detail', pk=movie.id)
     else:
         review_form = ReviewForm()
+
     
     context = {
         'movie': movie,
         'reviews': reviews,
-        'review_form': review_form
+        'review_form': review_form,
+        'average_rating': movie.average_rating,
     }
     return render(request, 'project/movie_detail.html', context)
 
