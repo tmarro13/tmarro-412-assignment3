@@ -1,53 +1,41 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
 <h1>{{ movie.title }}</h1>
-
-{% if movie.image %}
-    <img src="{{ movie.image.url }}" alt="{{ movie.title }}" style="max-width: 400px; height: auto; display: block; margin: 10px 0;">
-{% else %}
-    <p>No image available for this movie.</p>
-{% endif %}
-
+<img src="{{ movie.image }}" alt="{{ movie.title }}" style="max-width: 300px; height: auto;">
+<p><strong>Release Year:</strong> {{ movie.release_year }}</p>
 <p><strong>Director:</strong> {{ movie.director }}</p>
 
-<p><strong>Tags:</strong>
-    {% if movie.tags.exists %}
-        {% for tag in movie.tags.all %}
-            <span>{{ tag.name }}</span>{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    {% else %}
-        <span>No tags available.</span>
-    {% endif %}
-</p>
-
-<p><strong>Release Year:</strong> {{ movie.release_year }}</p>
+<h3>Tags:</h3>
+<ul>
+    {% for tag in movie.tags.all %}
+    <li>{{ tag.name }}</li>
+    {% empty %}
+    <li>No tags available</li>
+    {% endfor %}
+</ul>
 
 <h2>Reviews</h2>
 <ul>
     {% for review in reviews %}
-        <li>{{ review.user.username }} rated it {{ review.rating }}: {{ review.review_text }}</li>
+        <li>
+            <strong>{{ review.user.username }}</strong> rated it {{ review.rating }}/10:
+            <p>{{ review.review_text }}</p>
+        </li>
     {% empty %}
         <li>No reviews yet. Be the first to review this movie!</li>
     {% endfor %}
 </ul>
 
 {% if user.is_authenticated %}
-    <h3>Add a Review</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{ review_form.as_p }}
-        <input type="submit" value="Submit Review">
-    </form>
+<h3>Add a Review</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ review_form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+</form>
 {% else %}
-    <p><a href="{% url 'login' %}">Login</a> to add a review.</p>
+<p><a href="{% url 'login' %}">Login</a> to add a review.</p>
 {% endif %}
-
-<!-- Option to Edit Movie -->
-{% if user.is_authenticated %}
-    <p>
-        <a href="{% url 'edit_movie' movie.id %}" style="display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">Edit Movie</a>
-    </p>
-{% endif %}
-
-<!-- Button to return to the movie list -->
-<p>
-    <a href="{% url 'movie_list' %}" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Back to Movie List</a>
-</p>
+<a href="{% url 'movie_list' %}">Back to Movies</a>
+{% endblock %}

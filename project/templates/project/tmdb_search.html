@@ -1,0 +1,27 @@
+{% extends 'project/base.html' %}
+
+{% block title %}
+    Search TMDB
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center">Search TMDB</h1>
+        <form method="get" class="d-flex justify-content-center mt-3">
+            <input type="text" name="query" value="{{ query }}" placeholder="Search for a movie..." class="form-control w-50">
+            <button type="submit" class="btn btn-primary ms-2">Search</button>
+        </form>
+        <ul class="list-group mt-4">
+            {% for movie in results %}
+                <li class="list-group-item">
+                    <strong>{{ movie.title }}</strong> ({{ movie.release_date }})
+                    {% if movie.poster_path %}
+                        <img src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}" alt="{{ movie.title }}" class="img-fluid mt-2">
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="list-group-item text-center">No results found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

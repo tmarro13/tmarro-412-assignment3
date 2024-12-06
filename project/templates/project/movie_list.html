@@ -1,60 +1,76 @@
-<h1>Movies</h1>
+{% extends 'project/base.html' %}
 
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
-    <ul>
+{% block title %}
+    Movie List
+{% endblock %}
+
+{% block content %}
+    <h1>Popular Movies</h1>
+
+    <!-- Search and Filter Form -->
+    <form method="get" class="search-bar">
+        <input type="text" name="query" placeholder="Search movies..." value="{{ query }}">
+
+        <!-- Tag Dropdown -->
+        <select name="tag">
+            <option value="">All Tags</option>
+            {% for tag in tags %}
+                <option value="{{ tag.id }}" {% if tag.id|stringformat:"s" == selected_tag|stringformat:"s" %}selected{% endif %}>
+                    {{ tag.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+
+    <!-- Movie List -->
+    <div class="movie-list">
         {% for movie in movies %}
-            <li>
-                <strong>{{ movie.title }}</strong> ({{ movie.release_year }}) by {{ movie.director }}
-                <br>
+            <div class="movie-item">
                 {% if movie.image %}
-                    <img src="{{ movie.image.url }}" alt="{{ movie.title }}" style="max-width: 200px; height: auto;">
+                    <img src="{{ movie.image }}" alt="{{ movie.title }}">
                 {% else %}
-                    <p>No image available</p>
+                    <img src="https://via.placeholder.com/200x300?text=No+Image" alt="No Image">
                 {% endif %}
-                <br>
-                <a href="{{ movie.id }}/">View Details</a>
-                <ul>
-                    <li><strong>Tags:</strong></li>
-                    {% if movie.tags.all %}
-                        <ul>
-                            {% for tag in movie.tags.all %}
-                                <li>{{ tag.name }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <p>No tags available.</p>
-                    {% endif %}
-                </ul>
-                <ul>
-                    <li><strong>Reviews:</strong></li>
-                    {% for review in movie.reviews.all %}
-                        <li>
-                            <strong>{{ review.user.username }}</strong> - Rating: {{ review.rating }}
-                            <br>
-                            {{ review.review_text }}
-                        </li>
+                <h3>{{ movie.title }}</h3>
+                <p><strong>Release Year:</strong> {{ movie.release_year }}</p>
+                <p><strong>Director:</strong> {{ movie.director|default:"Unknown" }}</p>
+                <p><strong>Tags:</strong> 
+                    {% for tag in movie.tags.all %}
+                        {{ tag.name }}{% if not forloop.last %}, {% endif %}
                     {% empty %}
-                        <li>No reviews yet.</li>
+                        None
                     {% endfor %}
-                </ul>
-            </li>
+                </p>
+                <p><strong>Reviews:</strong> {{ movie.review_count }}</p>
+                <a href="{% url 'movie_detail' movie.id %}">View Details</a>
+            </div>
         {% empty %}
-            <li>No movies available.</li>
+            <p>No movies found.</p>
         {% endfor %}
-    </ul>
-    <a href="{% url 'add_movie' %}">Add a Movie</a>
-{% else %}
-    <p>You are not logged in.</p>
-    <p>
-        <a href="{% url 'login' %}">Login</a> or 
-        <a href="{% url 'signup' %}">Create an Account</a> to add and review movies.
-    </p>
-    <ul>
-        {% for movie in movies %}
-            <li>{{ movie.title }} ({{ movie.release_year }})</li>
-        {% empty %}
-            <li>No movies available.</li>
+    </div>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+    
+        {% for num in pagination_range %}
+            {% if num == page_obj.number %}
+                <span class="current">{{ num }}</span>
+            {% else %}
+                <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
         {% endfor %}
-    </ul>
-{% endif %}
+    
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
+    
+    
+{% endblock %}

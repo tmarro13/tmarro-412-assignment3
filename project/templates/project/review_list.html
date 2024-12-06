@@ -1,0 +1,26 @@
+{% extends 'project/base.html' %}
+
+{% block title %}
+    Recent Reviews
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center">Recent Reviews</h1>
+        <ul class="list-group mt-3">
+            {% for review in reviews %}
+                <li class="list-group-item">
+                    <strong>{{ review.movie.title }}</strong> by {{ review.user.username }}:
+                    <span class="text-muted">Rated {{ review.rating }}/10</span>
+                    <p>{{ review.review_text }}</p>
+                    <small class="text-muted">Posted on {{ review.created_at|date:"F j, Y, g:i a" }}</small>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-center">No reviews available.</li>
+            {% endfor %}
+        </ul>
+        <div class="text-center mt-4">
+            <a href="{% url 'movie_list' %}" class="btn btn-secondary">Back to Movies</a>
+        </div>
+    </div>
+{% endblock %}

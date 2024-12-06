@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}The Silver Screen{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'project/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to The Silver Screen</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'movie_list' %}">Popular Movies</a></li>
+                <li><a href="{% url 'highest_rated_movies' %}">Highest Rated Movies</a></li>
+                <li><a href="{% url 'review_list' %}">All Reviews</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'my_reviews' %}">My Reviews</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
