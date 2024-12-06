@@ -259,3 +259,26 @@ form button:hover {
     background-color: #ffcc00;
     color: #333;
 }
+
+.actions {
+    margin-top: 1rem;
+}
+
+.actions .btn {
+    margin-right: 0.5rem;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+    color: #fff;
+}

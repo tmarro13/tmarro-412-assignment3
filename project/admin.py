@@ -15,7 +15,7 @@ class MovieAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('movie', 'user', 'rating', 'created_at')  # Replace 'date' with 'created_at'
+    list_display = ('movie', 'user', 'rating', 'created_at') 
     search_fields = ('movie__title', 'user__username')
     list_filter = ('rating', 'created_at')
 

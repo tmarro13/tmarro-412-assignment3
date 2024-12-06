@@ -108,6 +108,14 @@ def highest_rated_movies(request):
     return render(request, 'project/highest_rated_movies.html', {'movies': movies, 'page_obj': page_obj, "pagination_range": pagination_range,})
 
 @login_required
+def delete_review(request, pk):
+    review = get_object_or_404(Review, pk=pk, user=request.user)  # Ensure only the owner can delete
+    if request.method == "POST":
+        review.delete()
+        return redirect('my_reviews')  # Redirect to "My Reviews" after deletion
+    return HttpResponseForbidden("Invalid request method.")  # Disallow non-POST requests
+
+@login_required
 def my_reviews(request):
     reviews = Review.objects.filter(user=request.user)
     return render(request, 'project/my_reviews.html', {'reviews': reviews})
