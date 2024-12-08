@@ -1,0 +1,240 @@
+/* General Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #2a2a2a, #1e1e1e); /* Dark silver gradient */
+    color: #e0e0e0; /* Soft silver text */
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: #c0c0c0; /* Light silver */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+}
+
+a {
+    color: #a8a8a8; /* Silver link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffffff; /* Bright silver hover */
+    text-decoration: underline;
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #3c3c3c, #2b2b2b); /* Metallic silver tones */
+    color: #ffffff;
+    padding: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav ul li a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    color: #d0d0d0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #c0c0c0; /* Bright silver hover */
+    color: #1e1e1e; /* Dark background text contrast */
+    border-radius: 5px;
+}
+
+/* Main Content */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Movie List */
+.movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.movie-item {
+    background: linear-gradient(to bottom, #3a3a3a, #2a2a2a); /* Subtle silver gradient */
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.movie-item img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(192, 192, 192, 0.6); /* Silver glow */
+}
+
+.movie-item h3 {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    color: #c0c0c0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.movie-item p {
+    margin: 0.5rem 0;
+}
+
+.movie-item a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #a8a8a8; /* Silver button background */
+    color: #1e1e1e; /* Dark text for contrast */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.movie-item a:hover {
+    background-color: #c0c0c0;
+    color: #1e1e1e;
+}
+
+.movie-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Movie Detail Page */
+img.movie-detail {
+    max-width: 400px;
+    height: auto;
+    border: 5px solid #c0c0c0; /* Silver border */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(192, 192, 192, 0.6); /* Silver glow */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+img.movie-detail:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 24px rgba(255, 255, 255, 0.8); /* Bright silver glow */
+}
+
+.movie-detail-info {
+    text-align: left;
+    margin-top: 1.5rem;
+    line-height: 1.8;
+    color: #d0d0d0; /* Softer silver text */
+}
+
+.movie-detail-info h3 {
+    color: #c0c0c0;
+    margin-bottom: 1rem;
+}
+
+.movie-detail-info p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+/* Forms */
+form input, form select, form button {
+    font-size: 1rem;
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+form input, form select {
+    width: 100%;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    transition: box-shadow 0.3s ease;
+}
+
+form input:focus, form select:focus {
+    box-shadow: 0 0 5px #c0c0c0; /* Silver focus glow */
+}
+
+form button {
+    background-color: #a8a8a8; /* Silver button */
+    color: #1e1e1e; /* Contrast text */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+form button:hover {
+    background-color: #c0c0c0; /* Brighter silver on hover */
+    transform: translateY(-2px);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.pagination a, .pagination span {
+    padding: 0.5rem 1rem;
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #a8a8a8; /* Silver hover */
+    color: #1e1e1e;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #a8a8a8;
+    color: #1e1e1e;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #c0c0c0;
+    transform: scale(1.05);
+}

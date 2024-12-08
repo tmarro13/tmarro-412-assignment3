@@ -85,7 +85,22 @@ def movie_list(request):
     return render(request, "project/movie_list.html", {"movies": movies, "page_obj": page_obj, "pagination_range": pagination_range, "tags": tags, "selected_tag": tag_id, "query": query})
 
 def highest_rated_movies(request):
-    movies = Movie.objects.annotate(average_rating=Avg('reviews__rating')).order_by('-average_rating')
+    tag_id = request.GET.get("tag", "")
+    query = request.GET.get("query", "")  # Get search term
+
+    movies = Movie.objects.annotate(average_rating=Avg('reviews__rating'))
+
+    # Filter by query (search term)
+    if query:
+        movies = movies.filter(title__icontains=query)
+    
+    # Filter by tag if a tag ID is provided
+    if tag_id:
+        movies = movies.filter(tags__id=tag_id)
+
+    # Order by the number of reviews in descending order
+    movies = movies.order_by('-average_rating')
+
     paginator = Paginator(movies, 50)  # Show 50 movies per page
     page = request.GET.get('page')
 
@@ -104,8 +119,10 @@ def highest_rated_movies(request):
         n for n in range(max(1, current_page - 2), min(total_pages + 1, current_page + 3))
     ]
 
+    # Fetch all tags for filtering
+    tags = Tag.objects.all()  # Ensure tags are fetched for the dropdown
 
-    return render(request, 'project/highest_rated_movies.html', {'movies': movies, 'page_obj': page_obj, "pagination_range": pagination_range,})
+    return render(request, 'project/highest_rated_movies.html', {'movies': movies, 'page_obj': page_obj, "pagination_range": pagination_range, 'tags': tags, 'selected_tag': tag_id, 'query': query})
 
 @login_required
 def delete_review(request, pk):
