@@ -61,7 +61,7 @@ def movie_list(request):
     # Order by the number of reviews in descending order
     movies = movies.order_by('-review_count')
     
-    paginator = Paginator(movies, 50)  # Show 50 movies per page
+    paginator = Paginator(movies, 50)  # Show 50 movies per page (can be adjusted)
     page = request.GET.get('page')
 
     try:
