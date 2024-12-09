@@ -5,6 +5,7 @@ from django.db.models import Count
 import plotly.express as px
 from plotly.io import to_html
 from datetime import datetime
+import plotly
 
 # Display a paginated list of voters with optional filtering
 class VoterListView(ListView):
